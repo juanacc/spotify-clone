@@ -20,3 +20,6 @@ Para on tener problemas con los archivos .json en angular tenemos que seter en t
 		"resolveJsonModule": true,
 
 	esto nos permite usar importaciones de archivo json dentro de los componentes
+
+Para crear un componente dentro de una carpeta sin que se genere una nueva carpeta adentro de la anterior:
+	ng g c folder/name --flat
