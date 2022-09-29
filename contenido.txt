@@ -1,0 +1,22 @@
+Para generar un nuevo proyecto salteando las preguntas iniciales de angular cli
+	ng new proyect_name --rounting --style=css
+Levantar la app en un puerto especifico
+	ng s --port=4100
+Link a comandos mas usados en angular: codigoencasa.com/los-comandos-de-angular-mas-usados/
+
+Levantar una aplicacion en una red local
+	ng s --host=0.0.0.0 --port=4100--> el port es opcional
+
+	con este comando podemos acceder a navegar la aplicacion levantada localmente. Para ello tengo que buscar la
+	ip de la computadora donde estoy corriendo la app.
+		en la consola ejecuto ipconfig y me fijo la ip local( IPv4 Address. . . . . . . . . . . : 192.168.100.19)
+		luego entro desde cualquier dispositivo conectado a esa red a 192.168.100.19:4200
+
+Iconos
+	https://iconscout.com/
+
+Para on tener problemas con los archivos .json en angular tenemos que seter en tsconfig.json lo siguiente:
+	dentro del objeto compilerOptions:
+		"resolveJsonModule": true,
+
+	esto nos permite usar importaciones de archivo json dentro de los componentes
