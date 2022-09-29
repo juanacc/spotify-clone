@@ -23,3 +23,19 @@ Para on tener problemas con los archivos .json en angular tenemos que seter en t
 
 Para crear un componente dentro de una carpeta sin que se genere una nueva carpeta adentro de la anterior:
 	ng g c folder/name --flat
+
+Lazy loading
+	para aplicar lazy loading, se deben importar en el archivo principal de rutas los modulos que tengan rutas
+Establecer alias para los paths
+	ver archivo tsconfig
+	"paths": {
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@modules/*": [
+        "src/app/modules/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+    },
