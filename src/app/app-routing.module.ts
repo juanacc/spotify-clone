@@ -4,9 +4,9 @@ import { FavoritesPageComponent } from '@modules/favorites/favorites-page/favori
 import { HomePageComponent } from '@modules/home/pages/home-page/home-page.component';
 
 const routes: Routes = [
-  { path: 'auth', loadChildren: () => import(`./modules/auth/auth.module`).then(m => m.AuthModule) }, //<---localhost:4200/
+  { path: 'auth', loadChildren: () => import(`./modules/auth/auth.module`).then(m => m.AuthModule) },
   {
-    path: '',
+    path: '', //<---localhost:4200/
     component: HomePageComponent,
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
   }
