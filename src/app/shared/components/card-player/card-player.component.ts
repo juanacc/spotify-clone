@@ -10,6 +10,7 @@ export class CardPlayerComponent implements OnInit {
   @Input() mode:any;
   //@Input() track!:TrackModel;
   @Input() track:TrackModel={_id:0,name:'',album:'', url:'', cover:''};
+  customImg = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/2048px-Angular_full_color_logo.svg.png';
   constructor() { }
 
   ngOnInit(): void {
