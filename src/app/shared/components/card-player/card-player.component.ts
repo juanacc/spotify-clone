@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TrackModel } from '@core/models/track.model';
+import { MultimediaService } from '@shared/services/multimedia.service';
 
 @Component({
   selector: 'app-card-player',
@@ -11,9 +12,14 @@ export class CardPlayerComponent implements OnInit {
   //@Input() track!:TrackModel;
   @Input() track:TrackModel={_id:0,name:'',album:'', url:'', cover:''};
   customImg = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/2048px-Angular_full_color_logo.svg.png';
-  constructor() { }
+  
+  constructor(private multimediaService: MultimediaService) { }
 
   ngOnInit(): void {
+  }
+
+  sendTrack(track: TrackModel): void{
+    this.multimediaService.callback.emit(track);
   }
 
 }
