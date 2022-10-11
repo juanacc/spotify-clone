@@ -33,10 +33,12 @@ export class TracksPageComponent implements OnInit, OnDestroy {
     //   console.log('Cancion random entrando...', response);
     // })
     // this.listObservers$.push(observer2$);
-    this.trackService.getAllTracks$().subscribe(tracks => {
-      console.log(tracks);
-      this.tracksTrending = tracks.data;
-      this.tracksRandom = tracks.data;
+    this.trackService.getAllTracks$().subscribe((tracks: TrackModel[]) => {
+      this.tracksTrending = tracks;
+    })
+
+    this.trackService.getAllRandom$().subscribe((tracks: TrackModel[]) => {
+      this.tracksRandom = tracks;
     })
   }
 

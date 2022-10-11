@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TrackModel } from '@core/models/track.model';
 import { Observable } from 'rxjs';
+import { map, mergeMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 //import { TrackModel } from '@core/models/track.model';
 //import { observable, Observable, of } from 'rxjs';
@@ -33,7 +35,38 @@ export class TrackService {
     // })
   }
 
+  private skipById(trackList: TrackModel[], id: number): Promise<TrackModel[]> {
+    return new Promise((resolve, reject) => {
+      const listTmp = trackList.filter(a => a._id !== id);
+      resolve(listTmp);
+    })
+  }
+
   getAllTracks$(): Observable<any> {
-    return this.httpClient.get(`${this.URL}/tracks`);
-  }  
+    return this.httpClient.get(`${this.URL}/tracks`)
+    .pipe(
+      map(({data}: any) => {
+        return data;
+      })
+    )
+  }
+  
+  // getAllRandom$(): Observable<any> {
+  //   return this.httpClient.get(`${this.URL}/tracks`)
+  //   .pipe(
+  //     map(({data}: any) => {
+  //       return data.reverse();
+  //     }),
+  //     map((reverseData: any) => {
+  //       return reverseData.filter((track:TrackModel) => track._id !== 1)
+  //     })
+  //   )
+  // }
+  getAllRandom$(): Observable<any> {
+    return this.httpClient.get(`${this.URL}/tracks`)
+    .pipe(
+      mergeMap(({data}: any) => this.skipById(data, 1)),
+      tap(data => console.log(data))
+    )
+  }
 }
