@@ -17,26 +17,31 @@ export class TracksPageComponent implements OnInit, OnDestroy {
   constructor(private trackService: TrackService) { }
 
   ngOnInit(): void {
-    const observer1$ = this.trackService.dataTracksTrending$.subscribe(response => {
-      this.tracksTrending = response;
-      this.tracksRandom = response;
-      console.log('Cancionnes: ', response);
-    })
-    this.listObservers$.push(observer1$);
+    // const observer1$ = this.trackService.dataTracksTrending$.subscribe(response => {
+    //   this.tracksTrending = response;
+    //   this.tracksRandom = response;
+    //   console.log('Cancionnes: ', response);
+    // })
+    // this.listObservers$.push(observer1$);
 
-    const observer2$ = this.trackService.dataTracksRandom$.subscribe(response => {
-      //this.tracksRandom = response;
+    // const observer2$ = this.trackService.dataTracksRandom$.subscribe(response => {
+    //   //this.tracksRandom = response;
       
-      //this.tracksRandom.push(response[0])//QUEDE ACA!!!!!!!
-      this.tracksRandom = [...this.tracksRandom, ...response];
+    //   //this.tracksRandom.push(response[0])//QUEDE ACA!!!!!!!
+    //   this.tracksRandom = [...this.tracksRandom, ...response];
 
-      console.log('Cancion random entrando...', response);
+    //   console.log('Cancion random entrando...', response);
+    // })
+    // this.listObservers$.push(observer2$);
+    this.trackService.getAllTracks$().subscribe(tracks => {
+      console.log(tracks);
+      this.tracksTrending = tracks.data;
+      this.tracksRandom = tracks.data;
     })
-    this.listObservers$.push(observer2$);
   }
 
   ngOnDestroy(): void {
-    this.listObservers$.forEach(u=>u.unsubscribe());
+    //this.listObservers$.forEach(u=>u.unsubscribe());
   }
 
 }
