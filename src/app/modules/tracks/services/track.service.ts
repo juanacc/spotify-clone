@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TrackModel } from '@core/models/track.model';
-import { Observable } from 'rxjs';
-import { map, mergeMap, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, mergeMap, tap, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 //import { TrackModel } from '@core/models/track.model';
 //import { observable, Observable, of } from 'rxjs';
@@ -66,7 +66,12 @@ export class TrackService {
     return this.httpClient.get(`${this.URL}/tracks`)
     .pipe(
       mergeMap(({data}: any) => this.skipById(data, 1)),
-      tap(data => console.log(data))
+      tap(data => console.log(data)),
+      catchError(err => {
+        const {status, statusText} = err;
+        console.log('Algo salio mal', status, statusText);
+        return of([]);
+      })
     )
   }
 }

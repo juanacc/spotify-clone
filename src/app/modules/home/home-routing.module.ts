@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'history',
     loadChildren: () => import('@modules/history/history.module').then(m => m.HistoryModule)
+  },
+  {
+    path: '**', //cuando no existe la ruta
+    redirectTo:'/tracks'
   }
 ];
 

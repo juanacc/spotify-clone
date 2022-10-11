@@ -33,13 +33,28 @@ export class TracksPageComponent implements OnInit, OnDestroy {
     //   console.log('Cancion random entrando...', response);
     // })
     // this.listObservers$.push(observer2$);
-    this.trackService.getAllTracks$().subscribe((tracks: TrackModel[]) => {
-      this.tracksTrending = tracks;
-    })
 
+    this.loadAllData();
+    this.loadAllRandomData()
+  }
+
+  async loadAllData(): Promise<any>{
+    // this.trackService.getAllTracks$().subscribe((tracks: TrackModel[]) => {
+    //   this.tracksTrending = tracks;
+    // });
+    
+    // this.trackService.getAllTracks$().toPromise()
+    // .then(res => {})
+    // .catch(err => console.log('Conexion error'))
+
+    this.tracksTrending = await this.trackService.getAllTracks$().toPromise();
+
+  }
+
+  loadAllRandomData():void {
     this.trackService.getAllRandom$().subscribe((tracks: TrackModel[]) => {
       this.tracksRandom = tracks;
-    })
+    });
   }
 
   ngOnDestroy(): void {
