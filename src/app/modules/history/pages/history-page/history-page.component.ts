@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
+import { TrackModel } from '@core/models/track.model';
+import { SearchService } from '@modules/history/services/search.service';
 
 @Component({
   selector: 'app-history-page',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryPageComponent implements OnInit {
 
-  constructor() { }
+  listResults: TrackModel[] = [];
+
+  constructor(private searchService: SearchService) { }
 
   ngOnInit(): void {
+  }
+
+  receiveData(term: string){
+    this.searchService.searchTracks$(term).subscribe(({data}) => {
+      this.listResults = data;
+    })
   }
 
 }
