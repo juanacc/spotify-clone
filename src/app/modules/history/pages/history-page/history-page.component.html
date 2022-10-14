@@ -1,4 +1,9 @@
 <div class="history-page">
     <app-search (callbackData)="receiveData($event)"></app-search>
-    <app-play-list-body [tracks]="listResults"></app-play-list-body>
+    <app-play-list-body [tracks]="listResults$ | async"></app-play-list-body>
+    <!--El async es un pipe que se usa para cuando estamos haciendo solicitudes
+    continuamente. Es util especialmente para cuando tenemos conexiones lentas de internet. 
+    De esta forma al hacer una solicitud y luego realizar otra, como puede ser cambiar el criterio de busqueda,
+    usando el async se cancela la ultima subscripcion y se atiende solo a la nueva.
+    Para poder usar este pipe, "listResults$" debe ser un observable ver archivo .ts-->
 </div>
