@@ -8,12 +8,12 @@ export class ImgBrokenDirective {
   
   @HostListener('error') handlerError () : void {// Escucho al host y particularmente al evento error del host. En este caso, el host seria el tag img
     const elementNative = this.host.nativeElement;
-    console.log('la imagen esta rota',this.host);
+    //console.log('la imagen esta rota',this.host);
     elementNative.src = this.customImg || '../../../assets/images/img-not-found.png';
   }
 
   constructor(private host:ElementRef) { 
-    console.log(host);
+    //console.log(host);
   }
 
 }
