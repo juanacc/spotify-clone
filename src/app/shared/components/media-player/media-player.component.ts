@@ -9,17 +9,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./media-player.component.css']
 })
 export class MediaPlayerComponent implements OnInit, OnDestroy {
-  mockCover:TrackModel={
-    cover:'https://i.ytimg.com/vi/rWZTpOq3whM/mqdefault.jpg',
-    album:'Gioli & Assia',
-    name:'BEBE (Oficial)',
-    url:'http://localhost/track.mp3',
-    _id:1
-  }
-
   listObservers$:Array<Subscription> = [];
+  state: string = 'paused';
 
-  constructor(private multimediaService: MultimediaService) { }
+  constructor(public multimediaService: MultimediaService) { }
 
   ngOnInit(): void {
     // const observer1$: Subscription = this.multimediaService.callback.subscribe((response: TrackModel) => {
@@ -27,16 +20,19 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
     //   this.mockCover = response;
     // })
     // this.listObservers$.push(observer1$);
-
-    const observable1$ = this.multimediaService.myObservable1$
-    .subscribe(
-      (responseOk) => {
-        console.log('El agua llega bien', responseOk)
-      },
-      (responseFail) => {
-        console.log('Algo salio mal', responseFail)
-      }
-    )
+    
+    //Explicacion de observables, subject y behaviorSubject
+    // const observable1$ = this.multimediaService.myObservable1$
+    // .subscribe(
+    //   (responseOk) => {
+    //     console.log('El agua llega bien', responseOk)
+    //   },
+    //   (responseFail) => {
+    //     console.log('Algo salio mal', responseFail)
+    //   }
+    // )
+    const observer1$ = this.multimediaService.playerStatus$.subscribe(status => this.state = status);
+    this.listObservers$.push(observer1$);
   }
 
   ngOnDestroy(): void {
